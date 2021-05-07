@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>主页</title>
+	<link rel="stylesheet" href="css/ht-sty.css">
+</head>
+<body class="bodybg4">
+	<!--内容页-->
+	<div class="liuc-con">
+		<div class="search_box">
+		<div class="juzhongbox">
+			<div class="ss_con">
+				<input type="text" class="s_txt" placeholder="输入关键词搜索" value="">
+				<a class="s_btn">查询</a>
+			</div>
+		</div>
+		</div>
+		<div class="liuc_tabbox">
+			<div class="tab_bom">
+				<ul id="one11">
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="js/jquery.min.js"></script> 
+<script type="text/javascript">
+		$(function(){
+			$('.s_btn').click(function(){
+				var inputText=$('.s_txt').val();
+				if(!inputText){
+					alert("请输入关键词");
+					return;
+				}
+				$('#one11').empty();
+				$.ajax({
+					type: 'POST',
+					url: "http://127.0.0.1:8888/SearchDemo",
+					dataType: "JSON",
+					data:{
+						word:inputText
+					},
+					success: function(data){
+					 	console.log(data);
+						data.forEach(item=>{
+							$('#one11').append("<li><p>"+item+"</p></li>");
+						})
+				  	},
+				});
+			});
+			
+			
+		})
+</script>
